@@ -36,7 +36,7 @@ jobs:
         POSTGRES_DB: kittygram
         DB_HOST: 127.0.0.1
         DB_PORT: 5432
-        ALLOWED_HOSTS:
+        ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
         DEBUG: False
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
