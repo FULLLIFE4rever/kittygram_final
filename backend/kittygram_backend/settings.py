@@ -1,7 +1,14 @@
 # flake8: noqa
 import os
 from pathlib import Path
-
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+sentry_sdk.init(
+dsn="https://7b50353e9b1708af8347efa7786c2631@o4505618981322752.ingest.sentry.io/4505715458310144",
+integrations=[DjangoIntegration()],
+send_default_pii=True,
+traces_sample_rate=1.0,
+profiles_sample_rate=1.0,)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', '1')
