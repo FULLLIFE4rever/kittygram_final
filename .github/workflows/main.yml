@@ -151,6 +151,16 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd kittygram
+          rm .env
+          echo "POSTGRES_USER=kittygram_user" > .env
+          echo "POSTGRES_PASSWORD=kittygram_password" > .env
+          echo "POSTGRES_DB=kittygram" > .env
+          echo "DB_HOST=db" > .env
+          echo "DB_PORT=5432" > .env
+          echo "DB_NAME=kittygram" > .env
+          echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" > .env
+          echo "DEBUG=False" > .env
+          echo "ALLOWED_HOSTS=127.0.0.1,localhost" > .env
           sudo docker compose -f docker-compose.production.yml pull
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
