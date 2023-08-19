@@ -160,10 +160,11 @@ jobs:
           echo "DB_NAME=kittygram" >> .env
           echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
           echo "DEBUG=False" >> .env
-          echo "ALLOWED_HOSTS=127.0.0.1,localhost" >> .env
+          echo "ALLOWED_HOSTS=127.0.0.1,localhost,kittygram.gerastar.ru" >> .env
           sudo docker compose -f docker-compose.production.yml pull
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
+          sleep 60
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
           sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /static/static/
